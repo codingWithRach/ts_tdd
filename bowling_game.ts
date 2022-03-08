@@ -16,22 +16,22 @@
 //     If he gets a spare or strike in the last (tenth) frame, the bowler gets to throw one or two more bonus balls, respectively. These bonus throws are taken as part of the same turn. If the bonus throws knock down all the pins, the process does not repeat: the bonus throws are only used to calculate the score of the final frame.
 //     The game score is the total of all frame scores.
 
-function getBowlingScore(bowlingLine) {
-  const STRIKE = "X";
-  const SPARE = "/";
+export function getBowlingScore(bowlingLine: string) {
+  const STRIKE: string = "X";
+  const SPARE: string = "/";
 
   // validation to check that the only allowed characters are X / - or digits 1-9
-  let totalScore = 0;
+  let totalScore: number = 0;
   if (!/^[0-9X\/\- ]*$/.test(bowlingLine)) return totalScore;
 
-  let isStrike = [2].fill(false);
-  let strikeCount = [2].fill(0);
-  let isSpare = false;
-  const rolls = bowlingLine.split(" ");
+  let isStrike: Array<boolean> = [false, false];
+  let strikeCount: Array<number> = [2].fill(0);
+  let isSpare: boolean = false;
+  const rolls: Array<string> = bowlingLine.split(" ");
 
-  for (let rollCount = 0; rollCount < rolls.length; rollCount++) {
+  for (let rollCount: number = 0; rollCount < rolls.length; rollCount++) {
     // determine score relating to this roll (taking no account of previous rolls)
-    const thisScore = [];
+    const thisScore: Array<number> = [];
     if (rolls[rollCount] === STRIKE) {
       thisScore.push(10);
     } else {
@@ -43,9 +43,9 @@ function getBowlingScore(bowlingLine) {
     }
 
     // allow for either of 2 previous rolls being a strike
-    for (let i = 0; i < isStrike.length; i++) {
+    for (let i: number = 0; i < isStrike.length; i++) {
       if (isStrike[i]) {
-        thisScore.forEach((ballThrow) => {
+        thisScore.forEach((ballThrow: number) => {
           totalScore += ballThrow;
           strikeCount[i] += 1;
           // reset flag once we've followed the strike for 2 rolls
@@ -77,7 +77,3 @@ function getBowlingScore(bowlingLine) {
   }
   return totalScore;
 }
-
-module.exports = {
-  getBowlingScore,
-};

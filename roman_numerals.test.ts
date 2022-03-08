@@ -1,4 +1,4 @@
-const { convertToRoman, convertToArabic } = require( "./roman_numerals");
+import { convertToRoman, convertToArabic } from "./roman_numerals";
 
 describe("convertToRoman function", () => {
   test.each([
@@ -8,7 +8,6 @@ describe("convertToRoman function", () => {
     [1972, "MCMLXXII"],
     [-1, ""],
     [9.23, ""],
-    ["hello", ""],
   ])(`should convert %p to %p`, (arabic, roman) => {
     expect(convertToRoman(arabic)).toEqual(roman);
   });
@@ -23,7 +22,6 @@ describe("convertToArabic function", () => {
     ["", 0],
     ["hello", 0],
     ["MCM99", 0],
-    [42, 0],
   ])(`should convert %p to %p`, (roman, arabic) => {
     expect(convertToArabic(roman)).toEqual(arabic);
   });

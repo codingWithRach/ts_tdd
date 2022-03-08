@@ -20,13 +20,13 @@ const romans = {
   1000: "M",
 };
 
-function convertToRoman(num) {
+export function convertToRoman(num: number): string {
   if (!Number.isInteger(num)) return "";
-  const arabics = Object.keys(romans)
-    .map((key) => parseInt(key))
-    .sort((a, b) => b - a);
-  let result = "";
-  arabics.forEach((arabic) => {
+  const arabics: Array<number> = Object.keys(romans)
+    .map((key: string) => parseInt(key))
+    .sort((a: number, b: number) => b - a);
+  let result: string = "";
+  arabics.forEach((arabic: number) => {
     while (num >= arabic) {
       num -= arabic;
       result += romans[arabic];
@@ -35,25 +35,20 @@ function convertToRoman(num) {
   return result;
 }
 
-function convertToArabic(roman) {
+export function convertToArabic(roman: string): number {
   if (!/^[IVXLCDM]*$/.test(roman)) return 0;
-  const romanChars = Object.keys(romans)
-    .map((key) => parseInt(key))
-    .sort((a, b) => b - a)
-    .map((arabic) => romans[arabic]);
-  let result = 0;
-  romanChars.forEach((entry) => {
+  const romanChars: Array<string> = Object.keys(romans)
+    .map((key: string) => parseInt(key))
+    .sort((a: number, b: number) => b - a)
+    .map((arabic: number) => romans[arabic]);
+  let result: number = 0;
+  romanChars.forEach((entry: string) => {
     while (roman.substring(0, entry.length) === entry) {
       result += parseInt(
-        Object.keys(romans).find((key) => romans[key] === entry)
+        Object.keys(romans).find((key: string) => romans[key] === entry)
       );
       roman = roman.substring(entry.length);
     }
   });
   return result;
 }
-
-module.exports = {
-  convertToArabic,
-  convertToRoman,
-};

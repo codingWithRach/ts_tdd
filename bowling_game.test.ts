@@ -6,7 +6,7 @@
 //     9- 9- 9- 9- 9- 9- 9- 9- 9- 9- (20 rolls: 10 pairs of 9 and miss) = 10 frames * 9 points = 90
 //     5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5 (21 rolls: 10 pairs of 5 and spare, with a final 5) = 10 frames * 15 points = 150
 
-const { getBowlingScore } = require("./bowling_game");
+import { getBowlingScore } from "./bowling_game";
 
 describe("getBowlingScore function", () => {
   test.each([
@@ -15,9 +15,12 @@ describe("getBowlingScore function", () => {
     ["5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5", 150],
     ["6/ 81 -- -- -- -- -- -- -- --", 27],
     ["6/ 81 ?? ?? ?? ?? ?? ?? ?? ??", 0],
-  ])(`should score the bowling line %p as %p`, (bowlingLine, score) => {
-    expect(getBowlingScore(bowlingLine)).toEqual(score);
-  });
+  ])(
+    `should score the bowling line %p as %p`,
+    (bowlingLine: string, score: number) => {
+      expect(getBowlingScore(bowlingLine)).toEqual(score);
+    }
+  );
 });
 
 // I'm aware that in a real-world scenario I need to be much more thorough with test cases!
