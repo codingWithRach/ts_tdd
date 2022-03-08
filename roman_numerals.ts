@@ -22,7 +22,9 @@ const romans = {
 
 function convertToRoman(num) {
   if (!Number.isInteger(num)) return "";
-  const arabics = Object.keys(romans).sort((a, b) => b - a);
+  const arabics = Object.keys(romans)
+    .map((key) => parseInt(key))
+    .sort((a, b) => b - a);
   let result = "";
   arabics.forEach((arabic) => {
     while (num >= arabic) {
