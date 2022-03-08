@@ -1,4 +1,4 @@
-const { convertToRoman, convertToArabic } = require("./roman_numerals");
+import { convertToRoman, convertToArabic } from "./roman_numerals";
 
 describe("convertToRoman function", () => {
   test.each([
