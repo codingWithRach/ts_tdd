@@ -38,6 +38,7 @@ function convertToRoman(num) {
 function convertToArabic(roman) {
   if (!/^[IVXLCDM]*$/.test(roman)) return 0;
   const romanChars = Object.keys(romans)
+    .map((key) => parseInt(key))
     .sort((a, b) => b - a)
     .map((arabic) => romans[arabic]);
   let result = 0;
