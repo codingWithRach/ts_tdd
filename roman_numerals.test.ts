@@ -26,3 +26,18 @@ describe("convertToArabic function", () => {
     expect(convertToArabic(roman)).toEqual(arabic);
   });
 });
+
+describe("calling convertToRoman with valid numbers followed by convertToArabic", () => {
+  test.each([[1], [10], [7], [1972]])(`should return %p`, (arabic) => {
+    expect(convertToArabic(convertToRoman(arabic))).toEqual(arabic);
+  });
+});
+
+describe("calling convertToRoman with invalid numbers followed by convertToArabic should return 0", () => {
+  test.each([
+    [-1, 0],
+    [9.23, 0],
+  ])(`should convert 0`, (origArabic, newArabic) => {
+    expect(convertToArabic(convertToRoman(origArabic))).toEqual(newArabic);
+  });
+});
