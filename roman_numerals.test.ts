@@ -33,11 +33,32 @@ describe("calling convertToRoman with valid numbers followed by convertToArabic"
   });
 });
 
-describe("calling convertToRoman with invalid numbers followed by convertToArabic should return 0", () => {
+describe("calling convertToRoman with invalid numbers followed by convertToArabic", () => {
   test.each([
     [-1, 0],
     [9.23, 0],
   ])(`should convert 0`, (origArabic, newArabic) => {
     expect(convertToArabic(convertToRoman(origArabic))).toEqual(newArabic);
+  });
+});
+
+describe("calling convertToArabic with valid roman numerals followed by convertToRoman", () => {
+  test.each([
+    ["I", 1],
+    ["X", 10],
+    ["VII", 7],
+    ["MCMLXXII", 1972],
+  ])(`should return %p`, (roman) => {
+    expect(convertToRoman(convertToArabic(roman))).toEqual(roman);
+  });
+});
+
+describe("calling convertToArabic with invalid roman numerals followed by convertToRoman", () => {
+  test.each([
+    ["", ""],
+    ["hello", ""],
+    ["MCM99", ""],
+  ])(`should return an empty string`, (origRoman, newRoman) => {
+    expect(convertToRoman(convertToArabic(origRoman))).toEqual(newRoman);
   });
 });
